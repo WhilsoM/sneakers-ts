@@ -1,0 +1,43 @@
+.content {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 50vh;
+
+	div {
+		flex-direction: column;
+
+		h3 {
+			margin-top: 0;
+			margin-bottom: 11px;
+		}
+		p {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			opacity: 0.5;
+			margin-top: 0;
+			margin-bottom: 41px;
+		}
+		.greenButton {
+			position: relative;
+			&:hover {
+				.back {
+					transform: translateX(5px);
+				}
+			}
+			.back {
+				position: absolute;
+				left: 30px;
+				transition: transform 0.15s ease-in-out;
+				margin: 0;
+			}
+		}
+	}
+}
+.sadEmoji {
+	margin-bottom: 31px;
+}
