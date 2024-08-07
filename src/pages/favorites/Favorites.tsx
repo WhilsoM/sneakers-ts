@@ -1,5 +1,4 @@
-import React from 'react'
-import { BackWithText } from '../../components/common/back-with-text/BackWithText'
+import { BackWithText } from '@widgets/back-with-text/BackWithText'
 
 export const Favorites = () => {
 	return (

@@ -1,5 +1,4 @@
-import React from 'react'
-import { Header } from '../../components/Header/Header'
+import { Header } from '@widgets/header/Header'
 import s from './style/OrdersIsEmpty.module.scss'
 
 export const OrdersIsEmpty = () => {

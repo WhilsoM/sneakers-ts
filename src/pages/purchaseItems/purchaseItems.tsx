@@ -1,6 +1,5 @@
-import React from 'react'
-import { BackWithText } from '../../components/common/back-with-text/BackWithText'
-import { Header } from '../../components/Header/Header'
+import { BackWithText } from '@widgets/back-with-text/BackWithText'
+import { Header } from '@widgets/header/Header'
 
 export const purchaseItems = () => {
 	return (
