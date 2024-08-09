@@ -1,11 +1,21 @@
 import { ICartItem, IItems } from '@shared/types/IItems'
 import { Card } from '@widgets/card/Card'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-export const Home = () => {
-	const [items, setItems] = useState<IItems[]>([])
-	const [cartItems, setCartItems] = useState<IItems[]>([])
+interface IHome {
+	items: IItems[]
+	cartItems: ICartItem[]
+	setItems: (data: {}) => void
+	setCartItems: (data: {}) => void
+}
+
+export const Home: FC<IHome> = ({
+	items,
+	cartItems,
+	setItems,
+	setCartItems,
+}) => {
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 
