@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import s from './styles/CartItem.module.scss'
 
 interface ICartItem {
 	title: string
@@ -9,9 +10,9 @@ interface ICartItem {
 
 export const CartItem: FC<ICartItem> = ({ title, price, img, removeItem }) => {
 	return (
-		<div className='cartItem d-flex'>
+		<div className={`${s.cartItem} flex`}>
 			<img
-				className='sneaker'
+				className={s.sneaker}
 				width={70}
 				height={70}
 				src={`/img/sneakers/${img}.jpg`}
@@ -20,7 +21,7 @@ export const CartItem: FC<ICartItem> = ({ title, price, img, removeItem }) => {
 
 			<div className='cartItemImg'></div>
 
-			<div className='mr-20'>
+			<div className='mr-5'>
 				<p>{title}</p>
 				<b>{price} руб.</b>
 			</div>
@@ -28,7 +29,9 @@ export const CartItem: FC<ICartItem> = ({ title, price, img, removeItem }) => {
 			<div>
 				<img
 					onClick={removeItem}
-					className='removeItem cu-p'
+					className={`${s.removeItem} cursor-pointer`}
+					width={56}
+					height={56}
 					src='/img/removeBtn.svg'
 					alt='remove'
 				/>

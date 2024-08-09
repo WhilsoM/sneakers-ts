@@ -8,7 +8,7 @@ interface IHeader {
 
 export const Header: FC<IHeader> = ({ onClickOpen }) => {
 	return (
-		<header className='flex justify-between p-5'>
+		<header className={`${s.header} flex justify-between p-7`}>
 			<div className='flex items-center'>
 				<img width={40} height={40} src='/img/logo.svg' alt='logo' />
 				<div>

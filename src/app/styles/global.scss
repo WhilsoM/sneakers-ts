@@ -5,7 +5,6 @@
 
 body {
 	font-family: 'Inter', sans-serif;
-
 	margin: 0;
 	background-color: #e7f6ff;
 }
@@ -22,11 +21,6 @@ body {
 	margin: 50px auto;
 }
 
-.content {
-	h1 {
-		margin: 0;
-	}
-}
 .cards {
 	gap: 40px;
 }
@@ -58,6 +52,7 @@ body {
 		border: 0;
 		padding: 13px;
 		font-size: 16px;
+		outline: none;
 		width: 200px;
 		padding-right: 25px;
 	}
@@ -81,26 +76,5 @@ body {
 
 	&:active {
 		background: darken(#9dd558, 5%);
-	}
-}
-
-.cartItem {
-	border: 1px solid #f3f3f3;
-	border-radius: 20px;
-	padding: 20px;
-	align-items: center;
-	overflow: hidden;
-	margin-bottom: 20px;
-
-	.sneaker {
-		margin-right: 20px;
-	}
-
-	p {
-		margin-bottom: 5px;
-		font-size: 14px;
-	}
-	b {
-		font-size: 16px;
 	}
 }

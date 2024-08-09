@@ -1,0 +1,29 @@
+.cartItem {
+	border: 1px solid #f3f3f3;
+	border-radius: 20px;
+	padding: 20px;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 20px;
+
+	.sneaker {
+		margin-right: 20px;
+	}
+
+	p {
+		margin-bottom: 5px;
+		font-size: 14px;
+	}
+	b {
+		font-size: 16px;
+	}
+}
+.removeItem {
+	opacity: 0.5;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+
+	&:hover {
+		opacity: 1;
+	}
+}

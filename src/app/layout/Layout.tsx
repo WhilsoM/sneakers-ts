@@ -1,8 +1,10 @@
 import { ICartItem } from '@shared/types/ICartItem'
 import { Drawer } from '@widgets/drawer/Drawer'
 import { Header } from '@widgets/header/Header'
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import { Outlet } from 'react-router-dom'
+
+export const Context = createContext({})
 
 export const Layout = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -10,22 +12,26 @@ export const Layout = () => {
 
 	const handleClick = () => {
 		setIsOpen((prev) => !prev)
+		document.body.style.overflow = 'auto'
 	}
+
 	return (
-		<div className='clear wrapper'>
-			{isOpen && (
-				<Drawer
-					cartItems={cartItems}
-					setCartItems={setCartItems}
-					closeDrawer={handleClick}
-				/>
-			)}
+		<Context.Provider value={{ cartItems }}>
+			<div className='clear wrapper'>
+				{isOpen && (
+					<Drawer
+						cartItems={cartItems}
+						setCartItems={setCartItems}
+						closeDrawer={handleClick}
+					/>
+				)}
 
-			<Header onClickOpen={handleClick} />
+				<Header onClickOpen={handleClick} />
 
-			<div>
-				<Outlet />
+				<div>
+					<Outlet />
+				</div>
 			</div>
-		</div>
+		</Context.Provider>
 	)
 }

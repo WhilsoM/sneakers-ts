@@ -18,14 +18,11 @@
 	right: 0;
 	background: #ffffff;
 	box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
-
-	h2 {
-		margin: 0;
-	}
 }
 .items {
 	overflow: auto;
 	margin-bottom: 40px;
+	flex: 1;
 }
 
 .cartTotalBlock {
@@ -50,6 +47,10 @@
 
 	.greenButton {
 		position: relative;
+		margin-top: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		&:hover {
 			img {
@@ -62,16 +63,6 @@
 			top: 20px;
 			transition: transform 0.15s ease-in-out;
 		}
-	}
-}
-
-.removeItem {
-	opacity: 0.5;
-	cursor: pointer;
-	transition: opacity 0.2s ease;
-
-	&:hover {
-		opacity: 1;
 	}
 }
 

@@ -17,6 +17,8 @@ export const Drawer: FC<IDrawer> = ({
 	setCartItems,
 }) => {
 	useEffect(() => {
+		document.body.style.overflow = 'hidden'
+
 		axios
 			.get('https://66b20d1d1ca8ad33d4f651b2.mockapi.io/cart')
 			.then((res) => setCartItems(res.data))
@@ -24,28 +26,24 @@ export const Drawer: FC<IDrawer> = ({
 	}, [])
 
 	const removeItem = (id: string) => {
-		axios
-			.delete(`https://66b20d1d1ca8ad33d4f651b2.mockapi.io/cart/${id}`)
-			.then(() =>
-				setCartItems((prev: []) => prev.filter((item) => item.id !== id))
-			)
-			.catch((err) => console.error(err))
+		axios.delete(`https://66b20d1d1ca8ad33d4f651b2.mockapi.io/cart/${id}`)
+		setCartItems((prev: []) => prev.filter((item) => item.id !== id))
 	}
 
 	return (
 		<div className={s.overlay}>
 			<div className={s.drawer}>
-				<h2 className='d-flex justify-between mb-20'>
+				<h2 className='flex justify-between mb-6'>
 					Корзина
 					<img
 						onClick={closeDrawer}
-						className='cu-p'
+						className='cursor-pointer'
 						src='/img/removeBtn.svg'
 						alt='remove'
 					/>
 				</h2>
 
-				<div className={`${s.items} flex`}>
+				<div className={`${s.items} flex flex-wrap`}>
 					{cartItems.length > 0 ? (
 						cartItems.map((item) => (
 							<CartItem
@@ -53,7 +51,7 @@ export const Drawer: FC<IDrawer> = ({
 								title={item.name}
 								price={item.price}
 								img={item.imgPath}
-								removeItem={() => removeItem(item.id)}
+								removeItem={() => removeItem(String(item.id))}
 							/>
 						))
 					) : (
@@ -77,7 +75,7 @@ export const Drawer: FC<IDrawer> = ({
 								<b>0 руб.</b>
 							</li>
 						</ul>
-						<button className='greenButton'>
+						<button className={`greenButton ${s.greenButton}`}>
 							Оформить заказ <img src='/img/arrow.svg' alt='arrow' />
 						</button>
 					</div>

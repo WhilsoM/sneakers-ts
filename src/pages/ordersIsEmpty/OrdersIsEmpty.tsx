@@ -1,11 +1,8 @@
-import { Header } from '@widgets/header/Header'
 import s from './style/OrdersIsEmpty.module.scss'
 
 export const OrdersIsEmpty = () => {
 	return (
 		<>
-			<Header />
-
 			<div className={s.content}>
 				<img
 					src='/img/pageOrdersIsEmpty/sad-emoji.svg'
@@ -13,7 +10,7 @@ export const OrdersIsEmpty = () => {
 					className={s.sadEmoji}
 				/>
 
-				<div className='d-flex justify-center align-center'>
+				<div className='flex justify-center items-center'>
 					<h3>У вас нет заказов</h3>
 					<p>
 						<span>Вы нищеброд?</span> <span>Оформите хотя бы один заказ.</span>
