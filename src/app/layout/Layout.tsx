@@ -1,8 +1,8 @@
+import { Home } from '@pages/home/Home'
 import { ICartItem } from '@shared/types/ICartItem'
 import { Drawer } from '@widgets/drawer/Drawer'
 import { Header } from '@widgets/header/Header'
 import { createContext, useState } from 'react'
-import { Outlet } from 'react-router-dom'
 
 export const Context = createContext({})
 
@@ -29,7 +29,7 @@ export const Layout = () => {
 				<Header onClickOpen={handleClick} />
 
 				<div>
-					<Outlet />
+					<Home />
 				</div>
 			</div>
 		</Context.Provider>
