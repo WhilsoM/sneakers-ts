@@ -2,24 +2,26 @@ import { FC, useState } from 'react'
 import ContentLoader from 'react-content-loader'
 import s from './Card.module.scss'
 
-interface ICard {
+interface IAddToCart {
 	id: number
-	title: string
+	name: string
 	price: number
 	imgPath: number
-	addToCart: (item: {
-		id: number
-		title: string
-		price: number
-		imgPath: number
-	}) => void
+}
+
+interface ICard {
+	id: number
+	name: string
+	price: number
+	imgPath: number
+	addToCart: (item: IAddToCart) => void
 	added: boolean
 	loading: boolean
 }
 
 export const Card: FC<ICard> = ({
 	id,
-	title,
+	name,
 	price,
 	imgPath,
 	addToCart,
@@ -29,8 +31,8 @@ export const Card: FC<ICard> = ({
 	const [isAdded, setIsAdded] = useState(added)
 	const [isFavorite, setIsFavorite] = useState(false)
 
-	const onClickCart = () => {
-		addToCart({ id, title, price, imgPath })
+	const onClickToCart = () => {
+		addToCart({ id, name, price, imgPath })
 		setIsAdded((prev) => !prev)
 	}
 
@@ -70,7 +72,7 @@ export const Card: FC<ICard> = ({
 						alt='sneaker'
 					/>
 
-					<h5>{title}</h5>
+					<h5>{name}</h5>
 
 					<div className='flex justify-between items-center'>
 						<div className='flex flex-col'>
@@ -78,7 +80,7 @@ export const Card: FC<ICard> = ({
 							<b>{price} руб.</b>
 						</div>
 
-						<button onClick={onClickCart}>
+						<button onClick={onClickToCart}>
 							<img
 								width={32}
 								height={32}

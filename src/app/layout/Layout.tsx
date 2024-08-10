@@ -1,11 +1,18 @@
-import { Home } from '@pages/home/Home'
 import { ICartItem } from '@shared/types/ICartItem'
 import { IItems } from '@shared/types/IItems'
 import { Drawer } from '@widgets/drawer/Drawer'
 import { Header } from '@widgets/header/Header'
-import { createContext, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { Outlet } from 'react-router-dom'
 
-export const Context = createContext({})
+interface IContextValue {
+	items: IItems[]
+	setItems: Dispatch<SetStateAction<IItems[]>>
+	cartItems: ICartItem[]
+	setCartItems: Dispatch<SetStateAction<ICartItem[]>>
+}
+
+export const Context = createContext<IContextValue | undefined>(undefined)
 
 export const Layout = () => {
 	const [items, setItems] = useState<IItems[]>([])
@@ -18,25 +25,14 @@ export const Layout = () => {
 	}
 
 	return (
-		<Context.Provider value={{ items, cartItems }}>
+		<Context.Provider value={{ items, setItems, cartItems, setCartItems }}>
 			<div className='clear wrapper'>
-				{isOpen && (
-					<Drawer
-						cartItems={cartItems}
-						setCartItems={setCartItems}
-						closeDrawer={handleClick}
-					/>
-				)}
+				{isOpen && <Drawer closeDrawer={handleClick} />}
 
 				<Header onClickOpen={handleClick} />
 
 				<div>
-					<Home
-						items={items}
-						cartItems={cartItems}
-						setItems={setItems}
-						setCartItems={setCartItems}
-					/>
+					<Outlet />
 				</div>
 			</div>
 		</Context.Provider>

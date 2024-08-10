@@ -2,13 +2,13 @@ import { FC } from 'react'
 import s from './styles/CartItem.module.scss'
 
 interface ICartItem {
-	title: string
+	name: string
 	price: number
 	img: number
 	removeItem: () => void
 }
 
-export const CartItem: FC<ICartItem> = ({ title, price, img, removeItem }) => {
+export const CartItem: FC<ICartItem> = ({ name, price, img, removeItem }) => {
 	return (
 		<div className={`${s.cartItem} flex`}>
 			<img
@@ -22,7 +22,7 @@ export const CartItem: FC<ICartItem> = ({ title, price, img, removeItem }) => {
 			<div className='cartItemImg'></div>
 
 			<div className='mr-5'>
-				<p>{title}</p>
+				<p>{name}</p>
 				<b>{price} руб.</b>
 			</div>
 

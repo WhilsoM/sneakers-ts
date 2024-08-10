@@ -1,21 +1,23 @@
-import { FC, useEffect } from 'react'
+import { FC, useContext, useEffect } from 'react'
 import { CartItem } from '../cartItem/CartItem'
 
-import { ICartItem } from '@shared/types/ICartItem'
+import { Context } from '@app/layout/Layout'
+import { ICartItem } from '@shared/types/IItems'
 import axios from 'axios'
 import s from './Drawer.module.scss'
 
 interface IDrawer {
-	cartItems: ICartItem[]
 	closeDrawer: () => void
-	setCartItems: (res: {}) => void
 }
 
-export const Drawer: FC<IDrawer> = ({
-	cartItems = [],
-	closeDrawer,
-	setCartItems,
-}) => {
+export const Drawer: FC<IDrawer> = ({ closeDrawer }) => {
+	const context = useContext(Context)
+
+	if (!context) {
+		throw new Error('Home must be used within a Context.Provider')
+	}
+	const { setItems, cartItems, setCartItems } = context
+
 	useEffect(() => {
 		document.body.style.overflow = 'hidden'
 
@@ -25,11 +27,23 @@ export const Drawer: FC<IDrawer> = ({
 			.catch((err) => console.error(err))
 	}, [])
 
-	const removeItem = (id: string) => {
-		axios.delete(`https://66b20d1d1ca8ad33d4f651b2.mockapi.io/cart/${id}`)
-		setCartItems((prev: []) => prev.filter((item) => item.id !== id))
-	}
+	const removeItem = async (id: string) => {
+		try {
+			await axios.delete(
+				`https://66b20d1d1ca8ad33d4f651b2.mockapi.io/cart/${id}`
+			)
+			setCartItems((prev) => prev.filter((item: any) => item.id !== id))
 
+			setItems((prevItems: ICartItem[]) =>
+				prevItems.map((item: ICartItem) =>
+					item.id === id ? { ...item, added: false } : item
+				)
+			)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	// если удалил товар с корзины то чтобы менялось состояние и в карточке
 	return (
 		<div className={s.overlay}>
 			<div className={s.drawer}>
@@ -48,7 +62,7 @@ export const Drawer: FC<IDrawer> = ({
 						cartItems.map((item) => (
 							<CartItem
 								key={item.id}
-								title={item.name}
+								name={item.name}
 								price={item.price}
 								img={item.imgPath}
 								removeItem={() => removeItem(String(item.id))}
@@ -67,7 +81,12 @@ export const Drawer: FC<IDrawer> = ({
 							<li>
 								<span>Итого:</span>
 								<div className={s.dash}></div>
-								<b>0 руб.</b>
+								<b>
+									{cartItems.reduce((acc, item) => {
+										return acc + item.price
+									}, 0)}{' '}
+									руб.
+								</b>
 							</li>
 							<li>
 								<span>Налог 5%:</span>
